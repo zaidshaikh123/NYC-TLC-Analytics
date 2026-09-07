@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: raw_nyc_tlc
+    schema: nyc_tlc_raw
+    tables:
+      - name: trips
+      - name: taxi_zone_lookup
