@@ -6,3 +6,9 @@ sources:
     tables:
       - name: trips
       - name: taxi_zone_lookup
+
+models:
+  - name: stg_taxi_trips
+    description: This is a staging table derived from raw trips data
+  - name: stg_lookup
+    description: This is a staging table derived from raw taxi zone lookup data
