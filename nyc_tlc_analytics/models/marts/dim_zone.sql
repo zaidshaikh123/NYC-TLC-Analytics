@@ -4,7 +4,7 @@ WITH deduped_zone AS (
 ),
 
 uuid_data AS (
-    SELECT *, GENERATE_UUID() AS id
+    SELECT GENERATE_UUID() AS id, *
     FROM deduped_zone
 )
 
