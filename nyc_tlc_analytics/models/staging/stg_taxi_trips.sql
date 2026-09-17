@@ -5,8 +5,10 @@ WITH trips_raw AS (
 renamed AS (
     SELECT 
         vendorid AS vendor_id,
-        tpep_pickup_datetime AS pickup_dt,
-        tpep_dropoff_datetime AS dropoff_dt,
+        DATE(tpep_pickup_datetime,'America/New_York') AS pickup_date,
+        TIME(tpep_pickup_datetime,'America/New_York') AS pickup_time,
+        DATE(tpep_dropoff_datetime,'America/New_York') AS dropoff_date,
+        TIME(tpep_dropoff_datetime,'America/New_York') AS dropoff_time,
         passenger_count,
         trip_distance,
         pulocationid AS pickup_location_id,

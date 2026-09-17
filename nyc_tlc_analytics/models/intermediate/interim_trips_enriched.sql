@@ -10,10 +10,10 @@ WITH inter_trips_lookup AS (
 ),
 
 enriched_data AS (
-    SELECT *, TIMESTAMP_DIFF(dropoff_dt, pickup_dt, MINUTE) AS trip_duration_mins,
+    SELECT *, TIME_DIFF(dropoff_time, pickup_time, MINUTE) AS trip_duration_mins,
     (tip_amount/NULLIF(fare_amount,0)) AS tip_percentage,
-    EXTRACT(HOUR FROM pickup_dt AT TIME ZONE 'America/New_York') AS pickup_hour,
-    FORMAT_TIMESTAMP('%A', pickup_dt, 'America/New_York') AS pickup_dow,
+    EXTRACT(HOUR FROM pickup_time) AS pickup_hour,
+    FORMAT_DATE('%A', pickup_date) AS pickup_dow,
     (CASE WHEN fare_amount < 0 OR passenger_count <= 0 OR trip_distance <= 0 THEN TRUE
     ELSE FALSE END) AS is_likely_invalid
     FROM inter_trips_lookup
