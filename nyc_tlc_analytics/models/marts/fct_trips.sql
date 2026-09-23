@@ -27,7 +27,8 @@ trip_x_zone AS (
 ),
 
 fct_data AS (
-    SELECT vendor_id, pickup_date_uid, pickup_time, dropoff_date_uid, dropoff_time, passenger_count, trip_distance,
+    SELECT GENERATE_UUID() AS trip_id,
+    vendor_id, pickup_date_uid, pickup_time, dropoff_date_uid, dropoff_time, passenger_count, trip_distance,
     pickup_location_uid, dropoff_location_uid, payment_type, fare_amount, extra,
     mta_tax, tip_amount, tolls_amount, improvement_surcharge, total_amount, trip_duration_mins,
     tip_percentage, pickup_hour, is_likely_invalid

@@ -17,9 +17,10 @@ EXTRACT(YEAR FROM date_utc) AS year,
 EXTRACT(MONTH FROM date_utc) AS month,
 EXTRACT(DAY FROM date_utc) AS day,
 FORMAT_DATE('%A',date_utc) AS dow,
+EXTRACT(DAYOFWEEK FROM date_utc) AS dow_num,
 (CASE
     WHEN EXTRACT(DAYOFWEEK FROM date_utc) IN (1,7) THEN 'Weekend'
     ELSE 'Weekday'
-END) AS is_weekday
+END) AS is_weekend
 FROM uuid_date
 ORDER BY date_utc

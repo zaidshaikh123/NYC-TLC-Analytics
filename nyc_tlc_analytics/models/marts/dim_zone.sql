@@ -4,7 +4,7 @@ WITH deduped_zone AS (
 ),
 
 uuid_data AS (
-    SELECT GENERATE_UUID() AS id, *
+    SELECT {{dbt_utils.generate_surrogate_key(['zone','borough','service_zone'])}} AS id, *
     FROM deduped_zone
 )
 
