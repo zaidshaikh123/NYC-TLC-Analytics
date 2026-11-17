@@ -10,12 +10,14 @@ WITH inter_trips_lookup AS (
 ),
 
 enriched_data AS (
-    SELECT *, TIME_DIFF(dropoff_time, pickup_time, MINUTE) AS trip_duration_mins,
+    SELECT *,
     (tip_amount/NULLIF(fare_amount,0)) AS tip_percentage,
     EXTRACT(HOUR FROM pickup_time) AS pickup_hour,
-    FORMAT_DATE('%A', pickup_date) AS pickup_dow,
-    (CASE WHEN fare_amount < 0 OR passenger_count <= 0 OR trip_distance <= 0 THEN TRUE
-    ELSE FALSE END) AS is_likely_invalid
+    fare_amount/NULLIF(trip_distance,0) AS fare_per_mile,
+    trip_distance/NULLIF(trip_duration_mins/60.0 ,0) AS speed_mph,
+    (CASE WHEN fare_amount < 0 OR passenger_count <= 0 OR (trip_distance <= 0 AND fare_amount > 0) OR trip_duration_mins <= 0 OR trip_distance/NULLIF(trip_duration_mins ,0) < 0 THEN TRUE
+    ELSE FALSE END) AS is_likely_invalid,
+    (CASE WHEN rate_code_id = 1 AND trip_distance BETWEEN 0.5 AND 50 AND fare_amount > 0 AND trip_duration_mins BETWEEN 1 AND 180 AND trip_distance/NULLIF(trip_duration_mins/60.0, 0) < 60 THEN TRUE ELSE FALSE END) AS is_efficiency_eligible
     FROM inter_trips_lookup
 )
 

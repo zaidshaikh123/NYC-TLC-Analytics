@@ -5,6 +5,31 @@ sources:
     schema: nyc_tlc_raw
     tables:
       - name: trips
+        columns:
+          - name: VendorID
+            description: ID of vendor supplying the taxi
+          - name: tpep_pickup_datetime
+            description: It is pickup date and time in timestamp when the passenger was picked up
+          - name: tpep_dropoff_datetime
+            description: It is dropoff date and time in timestamp when the passenger was dropped off
+          - name: passenger_count
+            description: Total number of passengers during the trip event
+          - name: trip_distance
+            description: Total distance covered during the trip event
+          - name: RatecodeID
+          - name: store_and_fwd_flag
+          - name: PULocationID
+            description: ID of location from where passenger was picked up
+          - name: DOLocationID
+            description: ID of location to where the passenger was dropped off
+          - name: payment_type
+            description: Type of payment used by the passenger
+          - name: fare_amount
+            description: Fare amount paid by the passenger
+          - name: extra
+            description: Extra amount paid by the passenger
+          - name: mta_tax
+            description: MTA Tax applied 
       - name: taxi_zone_lookup
 
 models:

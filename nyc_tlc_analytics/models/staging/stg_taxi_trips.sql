@@ -9,6 +9,8 @@ renamed AS (
         TIME(tpep_pickup_datetime,'America/New_York') AS pickup_time,
         DATE(tpep_dropoff_datetime,'America/New_York') AS dropoff_date,
         TIME(tpep_dropoff_datetime,'America/New_York') AS dropoff_time,
+        TIMESTAMP_DIFF(tpep_dropoff_datetime, tpep_pickup_datetime, MINUTE) AS trip_duration_mins,
+        ratecodeid AS rate_code_id,
         passenger_count,
         trip_distance,
         pulocationid AS pickup_location_id,

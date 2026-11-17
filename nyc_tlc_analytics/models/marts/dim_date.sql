@@ -1,3 +1,9 @@
+/*Materialzied this model as table because if the model is saved as a view and if called/referred by any model
+the values inside the foreign key column will change/updated during the call without updating the values in parimary key of
+this model which causes the join to yeild no results 
+*/
+{{ config(materialized = "table") }}
+
 WITH date_spine AS (
     {{dbt_utils.date_spine(
         start_date = "CAST('2026-01-01' AS DATE)",

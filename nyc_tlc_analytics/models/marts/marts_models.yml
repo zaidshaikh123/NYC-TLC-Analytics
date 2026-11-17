@@ -1,0 +1,21 @@
+models:
+  - name: fct_trips
+    columns:
+    - name: trip_id
+      tests:
+        - unique
+        - not_null
+    - name: pickup_location_uid
+      tests:
+        - relationships:
+            to: ref('dim_zone')
+            field: id
+    - name: pickup_date_uid
+      tests:
+        - relationships:
+            to: ref('dim_date')
+            field: id
+    - name: payment_type
+      tests:
+        - accepted_values:
+            values: [1,2,3,4,5,6]

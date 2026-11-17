@@ -5,5 +5,6 @@ FROM {{ ref('fct_trips') }} AS ft INNER JOIN {{ ref('dim_date') }} AS dd
 ON ft.pickup_date_uid = dd.id
 INNER JOIN {{ ref('dim_zone') }} AS dz
 ON ft.pickup_location_uid = dz.id
+WHERE payment_type = 1 AND is_likely_invalid IS FALSE
 GROUP BY 1,2
 ORDER BY 1, avg_fare_amount DESC

@@ -1,3 +1,4 @@
+--Due to not having a billed account in GCP, I have not materilized the model as a table and saved it as a view
 WITH trips_enriched AS (
     SELECT * FROM {{ref('interim_trips_enriched')}}
 ),
@@ -28,10 +29,10 @@ trip_x_zone AS (
 
 fct_data AS (
     SELECT GENERATE_UUID() AS trip_id,
-    vendor_id, pickup_date_uid, pickup_time, dropoff_date_uid, dropoff_time, passenger_count, trip_distance,
+    vendor_id, pickup_date_uid, pickup_time, pickup_hour, dropoff_date_uid, dropoff_time, passenger_count, trip_distance,
     pickup_location_uid, dropoff_location_uid, payment_type, fare_amount, extra,
-    mta_tax, tip_amount, tolls_amount, improvement_surcharge, total_amount, trip_duration_mins,
-    tip_percentage, pickup_hour, is_likely_invalid
+    mta_tax, tip_amount, tolls_amount, improvement_surcharge, total_amount, trip_duration_mins, fare_per_mile,
+    speed_mph, tip_percentage, is_likely_invalid, is_efficiency_eligible
     FROM trip_x_zone
 )
 
