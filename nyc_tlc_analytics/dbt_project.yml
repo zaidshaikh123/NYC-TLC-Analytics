@@ -41,3 +41,6 @@ models:
     marts:
       +materialized: view
       +schema: marts
+    metrics:
+      +materialized: view
+      +schema: metrics
